@@ -3,98 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>用户登录</title>
-    <link rel="stylesheet" href="../public/css/layui.css" media="all">
-    <link rel="stylesheet" href="../public/css/admin.css" media="all">
-    <link rel="stylesheet" href="../public/css/dneglu.css">
-    <script src="../public/js/jquery-3.3.1.min.js"></script>
-    <!--<script src="../public/js/denglu.js"></script>-->
 </head>
 <body>
-<form id="login_form"  method="post" action="/login" onsubmit="return loginCheck()">
-    <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;position: relative">
-
-        <div class="layadmin-user-login-main">
-            <div class="layadmin-user-login-box layadmin-user-login-header">
-                <a href="/" style="text-decoration: none"><h2>Go购数码</h2></a>
-                <p>Go购用户登录</p>
-            </div>
-            <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
-
-                <div class="layui-form-item">
-                    <label class="" for="LAY-user-login-username" style="position: absolute;top: 7px;left: 9px">
-                        <svg t="1576141057815" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2538" width="20" height="20"><path d="M652.3 562.7C741.6 513.3 802 418.2 802 309c0-160.2-129.8-290-290-290-160.2 0-290 129.8-290 290 0 109.2 60.4 204.3 149.7 253.7C184 622.2 48 797.7 48 1005l58 0c0-224.2 181.8-406 406-406 224.2 0 406 181.8 406 406l58 0C976 797.7 840 622.2 652.3 562.7zM280 309c0-128.1 103.9-232 232-232 128.1 0 232 103.9 232 232 0 128.1-103.9 232-232 232C383.9 541 280 437.1 280 309z" p-id="2539"></path></svg>
-                    </label>
-                    <input type="text" name="username" id="LAY-user-login-username" lay-verify="required"
-                           placeholder="用户名" class="layui-input">
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="" for="LAY-user-login-password" style="position: absolute;left: 9px;top: 8px;;">
-                        <svg t="1576141124695" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3300" width="20" height="20"><path d="M916.210526 1024 107.789474 1024C78.012632 1024 53.894737 999.855158 53.894737 970.105263L53.894737 485.052632C53.894737 455.275789 78.012632 431.157895 107.789474 431.157895L188.631579 431.157895 188.631579 323.368421C188.631579 144.761263 333.419789 0 512 0 690.580211 0 835.368421 144.761263 835.368421 323.368421L835.368421 431.157895 916.210526 431.157895C945.987368 431.157895 970.105263 455.275789 970.105263 485.052632L970.105263 970.105263C970.105263 999.855158 945.987368 1024 916.210526 1024ZM781.473684 323.368421C781.473684 174.538105 660.830316 53.894737 512 53.894737 363.169684 53.894737 242.526316 174.538105 242.526316 323.368421L242.526316 431.157895 781.473684 431.157895 781.473684 323.368421ZM916.210526 485.052632 835.368421 485.052632 188.631579 485.052632 107.789474 485.052632 107.789474 970.105263 916.210526 970.105263 916.210526 485.052632ZM512 592.842105C526.874947 592.842105 538.947368 604.914526 538.947368 619.789474L538.947368 835.368421C538.947368 850.243368 526.874947 862.315789 512 862.315789 497.125053 862.315789 485.052632 850.243368 485.052632 835.368421L485.052632 619.789474C485.052632 604.914526 497.125053 592.842105 512 592.842105Z" p-id="3301"></path></svg>
-                    </label>
-                    <input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
-                           placeholder="密码" class="layui-input">
-                </div>
+    <h1>欢迎来到我的项目</h1>
 
 
-                <div class="layui-form-item" style="margin-bottom: 20px;">
-                    <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
-                    <a href="/zhuce" class="layadmin-user-jump-change layadmin-link"
-                       style="margin-top: 7px;">注册账号？</a>
-                </div>
-
-
-                <div class="layui-form-item">
-                    <button type="submit" id="login" class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</form>
-
-<!--<script src="node_modules/jquery/dist/jquery.js"></script>-->
-<script>
-    //    <!--存储用户名-->
-    function loginCheck() {
-        var username=document.getElementById('LAY-user-login-username').value;
-        window.sessionStorage.setItem('username',username);
-        return true;
-    }
-
-$('#login_form').on('submit',function (e) {
-e.preventDefault()//阻止默认设定
-var formData=$(this).serialize()//获取表单数据
-//判断非空
-if ($('#LAY-user-login-username').val()==''||$('#LAY-user-login-password').val()=='') {
-alert('输入不能为空')
-return
-}
-    $.ajax({
-        url:'/login',
-        type:'post',
-        data:formData,
-        dataType:'json',
-        success:function (data) {
-            var res_code=data.res_code
-            console.log(data);
-            console.log(res_code);
-            if (res_code==1){
-                alert('用户名不存在，请重新输入')
-            } else if (res_code==2){
-                alert('密码错误，请重新输入')
-            } else if (res_code==0){
-                alert('登录成功')
-                window.location.href='/?username='+document.getElementById('LAY-user-login-username').value;
-            } else {
-                alert('服务器忙，请稍后再试！')
-            }
-        }
-    })
-})
-
-
-
-</script>
 </body>
 </html>
